@@ -7,7 +7,7 @@ const { AlternativesGenerate } = require("../services/Questions/alternativesGene
 const path = require("node:path")
 
 class GroupController {
-    storage = path.join(__dirname, "..", "config", "session")
+    storage = path.join(__dirname, "..", "config", "storage")
 
     async create(session, name) {
         const groupGetBySessionService = new GroupGetBySession(this.storage)
