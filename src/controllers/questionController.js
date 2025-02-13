@@ -27,4 +27,4 @@ class QuestionContrller {
     }
 }
 
-module.exports = new QuestionContrller
+module.exports = QuestionContrller

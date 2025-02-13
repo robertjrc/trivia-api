@@ -1,12 +1,13 @@
-const groupController = require("./src/controllers/groupController")
-const playerController = require("./src/controllers/playerController")
-const questionController = require("./src/controllers/questionController")
+const GroupController = require("./src/controllers/groupController")
+const PlayerController = require("./src/controllers/playerController")
+const QuestionController = require("./src/controllers/questionController")
 
 class QuizGame {
-    constructor() {
-        this.group = groupController
-        this.player = playerController 
-        this.question = questionController 
+    constructor(storagePath) {
+        this.storage = storagePath
+        this.group = new GroupController(this.storage)
+        this.player = new PlayerController(this.storage) 
+        this.question = new QuestionController() 
     }
 }
 

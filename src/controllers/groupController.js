@@ -4,12 +4,17 @@ const { GroupSaveChanges } = require("../services/Group/saveChanges")
 const { GroupReset } = require("../services/Group/reset")
 const { GroupDelete } = require("../services/Group/delete")
 const { AlternativesGenerate } = require("../services/Questions/alternativesGenerate")
+const { existsSync, mkdirSync } = require("node:fs")
 const path = require("node:path")
 
 class GroupController {
-    storage = path.join(__dirname, "..", "config", "storage")
+    constructor(storagePath) {
+        this.storage = path.join(process.cwd(), `${storagePath}/quiz_storage`) 
+        this._storageExist()
+    }
 
     async create(session, name) {
+        console.log(this.storage)
         const groupGetBySessionService = new GroupGetBySession(this.storage)
         const groupSaveChangesService = new GroupSaveChanges(this.storage)
         const alternativesGenerate = new AlternativesGenerate()
@@ -43,6 +48,10 @@ class GroupController {
         const service = new GroupDelete(this.storage, groupGetBySessionService)
         return await service.execute(session)
     }
+
+    _storageExist() { 
+        if(!existsSync(this.storage)) { mkdirSync(this.storage) } 
+    }
 }
 
-module.exports = new GroupController
+module.exports = GroupController

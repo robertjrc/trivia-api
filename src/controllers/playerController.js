@@ -7,7 +7,9 @@ const { PlayerOverallScore } = require("../services/Player/overallScore")
 const path = require("node:path")
 
 class PlayerController {
-    storage = path.join(__dirname, "..", "config", "session")
+    constructor(storagePath) {
+        this.storage = path.join(process.cwd(), `${storagePath}/quiz_storage`)
+    }
 
     async create(session, playerProps) {
         const groupGetBySessionService = new GroupGetBySession(this.storage)
@@ -40,4 +42,4 @@ class PlayerController {
     }
 }
 
-module.exports = new PlayerController
+module.exports = PlayerController
