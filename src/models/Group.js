@@ -14,7 +14,7 @@ class Group {
     }
 
     chooseQuestion(questions) {
-        const result = Math.floor(Math.random() * (questions.length + 0) + 0)
+        const result = Math.floor(Math.random() * (questions.length - 0) + 0)
         return questions[result]
     }
 }
