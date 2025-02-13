@@ -1,4 +1,4 @@
-const { playerController } = require("../../index")
+const QuizGame = require("../../index")
 
 test("should update player case wrong", async () => {
     const player = {
@@ -16,7 +16,10 @@ test("should update player case wrong", async () => {
         moves: player.moves
     }
 
-    const playerWrongAnswerService = playerController.wrongAnswer(wrongAnswerProps)
+
+    const quizGame = new QuizGame() 
+
+    const playerWrongAnswerService = quizGame.player.wrongAnswer(wrongAnswerProps)
 
     console.log(playerWrongAnswerService)
 

@@ -1,4 +1,4 @@
-const { questionController } = require("../../index")
+const QuizGame = require("../../index")
 
 test("should remove a current question", async () => {
     const data = {
@@ -54,7 +54,10 @@ test("should remove a current question", async () => {
         current_question_id: 3
     }
 
-    const removeCurrentQuestionService = await questionController.removeCurrentQuestion(data.questions, data.current_question_id)
+
+    const quizGame = new QuizGame()
+
+    const removeCurrentQuestionService = await quizGame.question.removeCurrentQuestion(data.questions, data.current_question_id)
     console.log(removeCurrentQuestionService)
 
     expect(removeCurrentQuestionService[2].id).toBe(4)

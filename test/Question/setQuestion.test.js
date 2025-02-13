@@ -1,4 +1,4 @@
-const { questionController } = require("../../index")
+const QuizGame = require("../../index")
 
 test("should set a new question", () => {
     const data = {
@@ -55,7 +55,9 @@ test("should set a new question", () => {
         moves: 0
     }
 
-    const setQuestionService = questionController.setQuestion(data)
+    const quizGame = new QuizGame()
+
+    const setQuestionService = quizGame.question.setQuestion(data)
     console.log(setQuestionService)
 
     expect(setQuestionService.current_question_id).toBe(3)

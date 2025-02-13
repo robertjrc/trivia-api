@@ -1,4 +1,4 @@
-const { playerController } = require("../../index")
+const QuizGame = require("../../index")
 
 test("should update playe case win", async () => {
     const player = {
@@ -16,7 +16,9 @@ test("should update playe case win", async () => {
         moves: player.moves
     }
 
-    const playerCorrectAnswerService = playerController.correctAnswer(correctAnswerProps)
+    const quizGame = new QuizGame()
+
+    const playerCorrectAnswerService = quizGame.player.correctAnswer(correctAnswerProps)
     console.log(playerCorrectAnswerService)
 
     expect(playerCorrectAnswerService.score).toEqual(10)
