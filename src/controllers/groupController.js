@@ -14,7 +14,6 @@ class GroupController {
     }
 
     async create(session, name) {
-        console.log(this.storage)
         const groupGetBySessionService = new GroupGetBySession(this.storage)
         const groupSaveChangesService = new GroupSaveChanges(this.storage)
         const alternativesGenerate = new AlternativesGenerate()
