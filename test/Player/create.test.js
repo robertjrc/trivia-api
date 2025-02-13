@@ -1,4 +1,4 @@
-const { playerController } = require("../../index")
+const QuizGame = require("../../index")
 
 test("should create a player", async () => {
     const session = "920390203"
@@ -7,7 +7,9 @@ test("should create a player", async () => {
         name: "Fulano de tal"
     }
 
-    const playerCreateService = await playerController.create(session, playerProps)
+    const quizGame = new QuizGame() 
+
+    const playerCreateService = await quizGame.player.create(session, playerProps)
     console.log(playerCreateService)
 
     expect(playerCreateService.success).toBe(true)

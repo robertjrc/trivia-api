@@ -1,4 +1,4 @@
-const { questionController } = require("../../index")
+const QuizGame = require("../../index")
 
 test("should to generate alternative", () => {
     const question = {
@@ -12,7 +12,9 @@ test("should to generate alternative", () => {
         ]
     }
 
-    const alternativesGenerateService = questionController.alternativesGenerate(question)
+    const quizGame = new QuizGame() 
+
+    const alternativesGenerateService = quizGame.question.alternativesGenerate(question)
     console.log(alternativesGenerateService)
 
     expect(alternativesGenerateService[0]).toBe("2")
