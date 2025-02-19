@@ -13,12 +13,11 @@ class GroupGetBySession {
             message: "session not found."
         }
 
-        const data = readFileSync(_storage, "utf8")
-        const content = JSON.parse(data)
+        const data = JSON.parse(readFileSync(_storage, "utf8")) 
 
         return {
             success: true,
-            data: content
+            data
         }
     }
 }

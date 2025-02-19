@@ -11,12 +11,8 @@ class PlayerController {
         this.storage = path.join(process.cwd(), `${storagePath}/quiz_storage`)
     }
 
-    async create(session, playerProps) {
-        const groupGetBySessionService = new GroupGetBySession(this.storage)
-        const playerGetBySerialized = new PlayerGetBySerialized(groupGetBySessionService)
-
-        const service = new PlayerCreate(playerGetBySerialized)
-        return await service.exceute(session, playerProps)
+    create(playerProps) {
+        return new PlayerCreate().execute(playerProps)
     }
 
     async getBySerialized(session, serialized) {
@@ -27,18 +23,15 @@ class PlayerController {
     }
 
     correctAnswer(player) {
-        const service = new PlayerCorrectAnswer()
-        return service.execute(player)
+        return new PlayerCorrectAnswer().execute(player)
     }
 
     wrongAnswer(player) {
-        const service = new PlayerWrongAnswer()
-        return service.execute(player)
+        return new PlayerWrongAnswer().execute(player)
     }
 
-    async overallScore(players) {
-        const service = new PlayerOverallScore()
-        return await service.execute(players)
+    overallScore(players) {
+        return new PlayerOverallScore().execute(players)
     }
 }
 

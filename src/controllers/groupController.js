@@ -9,17 +9,13 @@ const path = require("node:path")
 
 class GroupController {
     constructor(storagePath) {
-        this.storage = path.join(process.cwd(), `${storagePath}/quiz_storage`) 
+        this.storage = path.join(process.cwd(), `${storagePath}/quiz_storage`)
         this._storageExist()
     }
 
-    async create(session, name) {
-        const groupGetBySessionService = new GroupGetBySession(this.storage)
-        const groupSaveChangesService = new GroupSaveChanges(this.storage)
+    create(session, name) {
         const alternativesGenerate = new AlternativesGenerate()
-
-        const service = new GroupCreate(groupGetBySessionService, groupSaveChangesService, alternativesGenerate)
-        return await service.execute(session, name)
+        return new GroupCreate(alternativesGenerate).execute(session, name)
     }
 
     async getBySession(session) {
@@ -32,13 +28,9 @@ class GroupController {
         return await service.execute(session, request)
     }
 
-    async reset(session, data) {
-        const groupGetBySessionService = new GroupGetBySession(this.storage)
-        const groupSaveChangesService = new GroupSaveChanges(this.storage)
+    reset(data) {
         const alternativesGenerate = new AlternativesGenerate()
-
-        const service = new GroupReset(groupGetBySessionService, groupSaveChangesService, alternativesGenerate)
-        return await service.execute(session, data)
+        return new GroupReset(alternativesGenerate).execute(data)
     }
 
     async delete(session) {
@@ -48,8 +40,8 @@ class GroupController {
         return await service.execute(session)
     }
 
-    _storageExist() { 
-        if(!existsSync(this.storage)) { mkdirSync(this.storage) } 
+    _storageExist() {
+        if (!existsSync(this.storage)) { mkdirSync(this.storage) }
     }
 }
 
