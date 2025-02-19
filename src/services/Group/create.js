@@ -2,19 +2,11 @@ const { Group } = require("../../models/Group")
 const questions = require("../../config/questions.json")
 
 class GroupCreate {
-    constructor(getGroupBySession, groupSaveChanges, alternativesGenerate) {
-        this._getGroupBySession = getGroupBySession
-        this._groupSaveChanges = groupSaveChanges
+    constructor(alternativesGenerate) {
         this._alternativesGenerate = alternativesGenerate
     }
 
-    async execute(session, name) {
-        const group = await this._getGroupBySession.execute(session)
-        if (group.success) return {
-            success: false,
-            message: "This session already exist."
-        }
-
+    execute(session, name) {
         let newGroup = new Group(session, name, questions) 
         const chosenQuestion = newGroup.chooseQuestion(questions)
 
@@ -23,8 +15,6 @@ class GroupCreate {
         newGroup.current_alternatives = this._alternativesGenerate.execute(chosenQuestion.alternatives)
         newGroup.current_question_id = chosenQuestion.id
         newGroup.status = true
-
-        await this._groupSaveChanges.execute(session, newGroup)
 
         return {
             success: true,

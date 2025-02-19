@@ -5,25 +5,20 @@ const { QuestionIsEmpty } = require("../services/Questions/isEmptyQuestions");
 
 class QuestionContrller {
     alternativesGenerate(question) {
-        const service = new AlternativesGenerate()
-        return service.execute(question)
+        return new AlternativesGenerate().execute(question)
     }
 
-   async removeCurrentQuestion(data, currentQuestionId) {
-        const service = new QuestionRemoveCurrent()
-        return service.execute(data, currentQuestionId)
+    async removeCurrentQuestion(data, currentQuestionId) {
+        return new QuestionRemoveCurrent().execute(data, currentQuestionId)
     }
 
     setQuestion(data) {
         const questionAlternativesGenerate = new AlternativesGenerate()
-
-        const service = new QuestionSet(questionAlternativesGenerate)
-        return service.execute(data)
+        return new QuestionSet(questionAlternativesGenerate).execute(data)
     }
 
     isEmptyQuestions(questions) {
-        const service = new QuestionIsEmpty()
-        return service.execute(questions)
+        return new QuestionIsEmpty().execute(questions)
     }
 }
 

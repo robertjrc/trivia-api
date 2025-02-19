@@ -1,5 +1,5 @@
 class PlayerOverallScore {
-    async execute(players) {
+    execute(players) {
         var text = "```pontuação geral```\n"
 
         players.sort((x, y) => {

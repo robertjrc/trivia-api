@@ -1,19 +1,11 @@
 const questions = require("../../config/questions.json")
 
 class GroupReset {
-    constructor(groupGetBySession, groupSaveChanges, alternativesGenerate) {
-        this._groupGetBySession = groupGetBySession
-        this._groupSaveChanges = groupSaveChanges
+    constructor(alternativesGenerate) {
         this._alternativesGenerate = alternativesGenerate
     }
 
-    async execute(session, data) {
-        const group = await this._groupGetBySession.execute(session)
-        if (!group.success) return {
-            success: false,
-            message: group.message
-        }
-
+    execute(data) {
         data.status = false
         data.players = []
         data.questions = questions
@@ -24,8 +16,6 @@ class GroupReset {
         data.current_question_id = chosenQuestion.id
         data.message_id = null
         data.moves = 1
-
-        await this._groupSaveChanges.execute(session, data)
 
         return {
             success: true,
