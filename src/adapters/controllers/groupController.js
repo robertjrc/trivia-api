@@ -26,9 +26,9 @@ class GroupController {
         return await usecase.execute(id, data);
     }
 
-    async reset() {
+    async reset(request) {
         const usecase = new GroupResetUsecase()
-        return await usecase.execute();
+        return await usecase.execute(request);
     }
 
     async isEmpty(questions) {
