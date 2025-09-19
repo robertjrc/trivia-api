@@ -6,7 +6,7 @@ export class GroupSetQuestionUsecase {
         const newGroup = new Group(group.id, group.name);
 
         newGroup.setCurrentInfo(group.questions);
-        newGroup.current_info.message_id = group.message_id;
+        newGroup.current_info.message_id = group.current_info.message_id;
 
         return Result.success("Question successfully defined.", newGroup.current_info);
     }
