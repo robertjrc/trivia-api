@@ -11,8 +11,9 @@ import { GroupInMemoryRepository } from "../../infrastructure/repositories/group
 class GroupController {
     #repository = new GroupInMemoryRepository();
 
-    create(request) {
-        return new GroupCreateUsecase().execute(request);
+    async create(request) {
+        const usecase = new GroupCreateUsecase();
+        return await usecase.execute(request);
     }
 
     async getById(id) {
@@ -26,18 +27,20 @@ class GroupController {
     }
 
     async reset() {
-        return new GroupResetUsecase().execute();
+        const usecase = new GroupResetUsecase()
+        return await usecase.execute();
     }
 
     async isEmpty(questions) {
-        return new GroupQuestionsEmptyVerify().execute(questions);
+        const usecase = new GroupQuestionsEmptyVerify();
+        return await usecase.execute(questions);
     }
 
-    async removeQuestionById(questions, questionId) {
+    removeQuestionById(questions, questionId) {
         return new GroupRemoveQuestionByIdUsecase().execute(questions, questionId);
     }
 
-    async setQuestion(group) {
+    setQuestion(group) {
         return new GroupSetQuestionUsecase().execute(group);
     }
 
