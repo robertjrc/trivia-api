@@ -1,14 +1,5 @@
-const GroupController = require("./src/controllers/groupController")
-const PlayerController = require("./src/controllers/playerController")
-const QuestionController = require("./src/controllers/questionController")
+import groupController from "./src/adapters/controllers/groupController.js";
+import playerController from "./src/adapters/controllers/playerController.js";
 
-class QuizGame {
-    constructor(storagePath) {
-        this.storage = storagePath
-        this.group = new GroupController(this.storage)
-        this.player = new PlayerController(this.storage) 
-        this.question = new QuestionController() 
-    }
-}
-
-module.exports = QuizGame
+export const Group = groupController;
+export const Player = playerController;
