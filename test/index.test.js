@@ -20,7 +20,7 @@ test("should test API.", async () => {
             name: groupName
         }
 
-        group = Group.create(groupForm).data;
+        group = (await Group.create(groupForm)).data;
     }
 
     const playerResponse = group.players.find(x => x.id === playerId);
