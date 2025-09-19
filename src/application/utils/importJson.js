@@ -1,6 +1,9 @@
-import { join } from "node:path";
+import { dirname, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 export async function importJson(filePath) {
-    return (await import(join(process.cwd(), filePath), { with: { type: "json" } })).default;
+    const dirname__ = dirname(fileURLToPath(import.meta.url));
+
+    return (await import(resolve(dirname__, filePath), { with: { type: "json" } })).default;
 }
 
